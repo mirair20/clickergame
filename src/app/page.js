@@ -3,16 +3,23 @@ import { useState, useEffect } from "react";
 import "./globals.css";
 
 export default function MyButton() {
-  const [cookie, setCount] = useState(0);
-  const [villagerCount, setVillagerCount] = useState(0);
-  const [villagerMultiplier, setVillagerMultiplier] = useState(0);
-  const [golemCount, setGolemCount] = useState(0);
-  const [golemMultiplier, setGolemMultiplier] = useState(0);
+  const [cookie, setCount] = useState(Number(sessionStorage.getItem("cookie")) || 0);
+  const [villagerCount, setVillagerCount] = useState(Number(sessionStorage.getItem("villagerCount")) || 0);
+  const [villagerMultiplier, setVillagerMultiplier] = useState(Number(sessionStorage.getItem("villagerMultiplier")) || 0);
+  const [golemCount, setGolemCount] = useState(Number(sessionStorage.getItem("golemCount")) || 0);
+  const [golemMultiplier, setGolemMultiplier] = useState(Number(sessionStorage.getItem("golemMultiplier")) || 0);
   const villagercost = 100;
   const golemcost = 10000;
   const upgradecost = 1000;
   const cookiespersec = villagerCount + villagerMultiplier + golemCount + golemMultiplier ;
-
+  
+  useEffect(() => {
+    sessionStorage.setItem("cookie", cookie.toString());
+    sessionStorage.setItem("villagerCount", villagerCount.toString());
+    sessionStorage.setItem("villagerMultiplier", villagerMultiplier.toString());
+    sessionStorage.setItem("golemCount", golemCount.toString());
+    sessionStorage.setItem("golemMultiplier", golemMultiplier.toString());
+  }, [cookie,villagerCount, villagerMultiplier, golemCount, golemMultiplier]);
  
   function handleClick() {
     setCount(cookie + 1);
@@ -21,8 +28,7 @@ export default function MyButton() {
         event.preventDefault();
       }
     });
-    
-    
+  
   }
   
   function purchaseVillager() {
@@ -73,7 +79,7 @@ export default function MyButton() {
   }, [villagerCount, villagerMultiplier, golemCount, golemMultiplier]);
 
  
-
+ 
 
   return (
     <div>
