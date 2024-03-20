@@ -13,6 +13,7 @@ export default function MyButton() {
   const upgradecost = 1000;
   const cookiespersec = villagerCount + villagerMultiplier + golemCount + golemMultiplier ;
 
+ 
   function handleClick() {
     setCount(cookie + 1);
   }
@@ -92,3 +93,9 @@ export default function MyButton() {
   
   );
 }
+document.getElementById("btn").addEventListener("keydown",function(event){
+  if(event.key === "Enter") {
+    event.preventDefault();
+  }
+});
+
