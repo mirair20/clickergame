@@ -16,6 +16,13 @@ export default function MyButton() {
  
   function handleClick() {
     setCount(cookie + 1);
+    document.getElementById("btn").addEventListener("keydown",function(event){
+      if(event.key === "Enter") {
+        event.preventDefault();
+      }
+    });
+    
+    
   }
   
   function purchaseVillager() {
@@ -93,9 +100,3 @@ export default function MyButton() {
   
   );
 }
-document.getElementById("btn").addEventListener("keydown",function(event){
-  if(event.key === "Enter") {
-    event.preventDefault();
-  }
-});
-
