@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-import MyGame from './services/clickHandle.js'; 
+import MyGame from './services/clickHandler.js'; 
 import "./globals.css";
 
 function App() {

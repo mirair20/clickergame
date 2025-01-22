@@ -9,25 +9,36 @@ export default function MyGame() {
   const [minerCount, setMinerCount] = useState(0);
   const [minerUpgradeCount, setMinerUpgradeCount] = useState(0);
   const [minerMultiplier, setMinerMultiplier] = useState(0);
+  //arvot matalat testaamisen helpottamiseksi
   const minercost = 10;
   const upgradecost = 1;
   const cookiespersec = minerCount + minerMultiplier;
 
+
   function handleClick() {
     setCount(cookie + 1);
     document
-      .getElementById("btn")
+    .getElementById("btn")
+    .addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+      }
+    });
+
+  }
+  
+  function purchaseMiner() {
+    if (cookie >= minercost) {
+      setCount(cookie - minercost);
+      setMinerCount(minerCount + 1);
+      document
+      .getElementById("btn1")
       .addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
           event.preventDefault();
         }
       });
-  }
 
-  function purchaseMiner() {
-    if (cookie >= minercost) {
-      setCount(cookie - minercost);
-      setMinerCount(minerCount + 1);
     } else {
       alert("insufficent cookies");
     }
@@ -38,6 +49,13 @@ export default function MyGame() {
       setCount(cookie - upgradecost);
       setMinerMultiplier(minerMultiplier + 1.5);
       setMinerUpgradeCount(minerUpgradeCount + 1);
+      document
+      .getElementById("btn2")
+      .addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+        }
+      });
     } else {
       alert("not enough cookies for upgrade");
     }
@@ -56,15 +74,15 @@ export default function MyGame() {
   return (
     <div>
       <button id="btn" className="Button" onClick={handleClick}></button>
-      <h1 className="cookies">{cookie} cookies</h1>
+      <h1 className="cookies">{cookie} Cookies</h1>
       <h1 className="counter">{cookiespersec}/s</h1>
 
       <div className="villager">
-        <button className="Button1" id="miner" onClick={purchaseMiner}>
+        <button  className="Button1" id="btn1" onClick={purchaseMiner}>
           {" "}
           {"Miner " + minercost + " C"} {minerCount}
         </button>
-        <button onClick={Upgrade}>
+        <button onClick={Upgrade} id="btn2">
           {" "}
           {"Upgrade " + upgradecost + " C"} {minerUpgradeCount}
         </button>
